@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class TeacherCourse
 {
-    public String code;
+    public String zkratka;
     public String title;
 }

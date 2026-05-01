@@ -17,25 +17,48 @@ public class DepartmentStatsReporting {
         // TODO 2.5: Oprav testovací data
     }
 
-    private static long maxActionStudentsCount(ActionsList actionsList) {
+    private static int maxActionStudentsCount(ActionsList actionsList) {
         // TODO 2.0: Doplň potřebné atributy do třídy apiDataModel.Action
         // TODO 2.1: Doplň: maximální počet přihlášených studentů na rozvrhové akci
-        return 50;
+        var result = actionsList.items.stream()
+                .filter(a->"K".equals(a.tydenZkr))
+                .filter(a->"Př".equals(a.typAkceZkr) || "Cv".equals(a.typAkceZkr))
+                .mapToInt(a->a.studentsCount)
+                .max()
+                .orElse(-1);
+        return result;
     }
 
-    private static long emptyActionsCount(ActionsList actionsList) {
+    private static int emptyActionsCount(ActionsList actionsList) {
         // TODO 2.2: Doplň: počet rozvrhových akcí s 0 studenty
-        return 60;
+        var result = actionsList.items.stream()
+                .filter(a->"K".equals(a.tydenZkr))
+                .filter(a->"Př".equals(a.typAkceZkr) || "Cv".equals(a.typAkceZkr))
+                .filter(a->a.studentsCount==0)
+                .count();
+        return (int)result;
     }
 
 
-    private static long maxTeacherScore(ActionsList actionsList) {
+    private static int maxTeacherScore(ActionsList actionsList) {
         // TODO 2.4: Doplň: nejvyšší výsledek dosažený metodou teacherScore mezi všemi učiteli ve vstupních datech
-        return 70;
+        var teacherIds = actionsList.items.stream()
+                .filter(a->"K".equals(a.tydenZkr))
+                .filter(a->"Př".equals(a.typAkceZkr) || "Cv".equals(a.typAkceZkr))
+                .mapToLong(a->a.teacherID)
+                .distinct();
+        var max = teacherIds.map(t->teacherScore(t, actionsList)).max();
+        return (int)max.orElse(0);
     }
 
     private static long teacherScore(long teacherId, ActionsList actionsList) {
         // TODO 2.3: Doplň pomocnou metodu - součet všech přihlášených studentů na akcích daného učitele
-        return 0;
+        var result = actionsList.items.stream()
+                .filter(a->"K".equals(a.tydenZkr))
+                .filter(a->a.teacherID == teacherId)
+                .filter(a->"Př".equals(a.typAkceZkr) || "Cv".equals(a.typAkceZkr))
+                .mapToInt(a->a.studentsCount)
+                .sum();
+        return result;
     }
 }
