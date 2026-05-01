@@ -21,7 +21,6 @@ public class DepartmentStatsReporting {
         // TODO 2.0: Doplň potřebné atributy do třídy apiDataModel.Action
         // TODO 2.1: Doplň: maximální počet přihlášených studentů na rozvrhové akci
         var result = actionsList.items.stream()
-                .filter(a->"K".equals(a.tydenZkr))
                 .filter(a->"Př".equals(a.typAkceZkr) || "Cv".equals(a.typAkceZkr))
                 .mapToInt(a->a.studentsCount)
                 .max()
@@ -32,7 +31,6 @@ public class DepartmentStatsReporting {
     private static int emptyActionsCount(ActionsList actionsList) {
         // TODO 2.2: Doplň: počet rozvrhových akcí s 0 studenty
         var result = actionsList.items.stream()
-                .filter(a->"K".equals(a.tydenZkr))
                 .filter(a->"Př".equals(a.typAkceZkr) || "Cv".equals(a.typAkceZkr))
                 .filter(a->a.studentsCount==0)
                 .count();
@@ -43,7 +41,6 @@ public class DepartmentStatsReporting {
     private static int maxTeacherScore(ActionsList actionsList) {
         // TODO 2.4: Doplň: nejvyšší výsledek dosažený metodou teacherScore mezi všemi učiteli ve vstupních datech
         var teacherIds = actionsList.items.stream()
-                .filter(a->"K".equals(a.tydenZkr))
                 .filter(a->"Př".equals(a.typAkceZkr) || "Cv".equals(a.typAkceZkr))
                 .mapToLong(a->a.teacherID)
                 .distinct();
@@ -54,7 +51,6 @@ public class DepartmentStatsReporting {
     private static long teacherScore(long teacherId, ActionsList actionsList) {
         // TODO 2.3: Doplň pomocnou metodu - součet všech přihlášených studentů na akcích daného učitele
         var result = actionsList.items.stream()
-                .filter(a->"K".equals(a.tydenZkr))
                 .filter(a->a.teacherID == teacherId)
                 .filter(a->"Př".equals(a.typAkceZkr) || "Cv".equals(a.typAkceZkr))
                 .mapToInt(a->a.studentsCount)

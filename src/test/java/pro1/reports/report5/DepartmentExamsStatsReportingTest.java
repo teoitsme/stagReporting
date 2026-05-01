@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class DepartmentExamsStatsReportingTest
 {
-    /*
     @Test
     void test01() throws IOException, JSONException {
         var actual = DepartmentExamsStatsReporting.GetReport(new TestDataSource(), "KIT");
@@ -23,5 +22,4 @@ public class DepartmentExamsStatsReportingTest
                 actualJson,
                 JSONCompareMode.LENIENT);
     }
-     */
 }

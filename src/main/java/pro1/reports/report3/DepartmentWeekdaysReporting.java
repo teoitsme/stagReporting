@@ -21,7 +21,6 @@ public class DepartmentWeekdaysReporting {
         if (actionsList.items == null) return 0;
 
         return (int) actionsList.items.stream()
-                .filter(a -> "K".equals(a.tydenZkr))
                 .filter(a -> weekday.equals(a.denZkr))
                 .count();
     }
