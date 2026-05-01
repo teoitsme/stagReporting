@@ -6,5 +6,5 @@ public class Exam {
     @SerializedName("obsazeni")
     public int studentsCount;
     @SerializedName("ucitIdno")
-    public Long teacherID;
+    public long teacherID;
 }
