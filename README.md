@@ -1,3 +1,4 @@
-Chybí readme.md se jménem a osobním číslem. Prosím doplnit, tento text smazat, a oznámit e-mailem že je hotovo.
+Tereza Gloserová
+I2500088
   
 Hodnocení: Jinak v pořádku  
